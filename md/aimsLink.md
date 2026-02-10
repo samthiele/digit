@@ -1,4 +1,4 @@
-## Aims
+## Aims and Goals
 
 -----
 
