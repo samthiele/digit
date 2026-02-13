@@ -1,621 +1,271 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>DigIT</title>
-  <link rel="icon" href="./icon.png" type="image/png">
-  <style>
-    html {
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-      height: 100%;
-    }
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: #021921ff;
-      height: 100%;
-      overflow-y: auto;
-      overflow-x: hidden;
-      scroll-snap-type: y mandatory;
-      scroll-behavior: smooth;
-      position: relative; /* anchor absolute snap points */
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 26px;
-      line-height: 1.5;
-    }
-    a {
-      color: #9cdbdaff;
-      text-decoration: none;
-      cursor: pointer;
-      font-size: 25px;
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    }
-    a.hover {
-      font-weight: bold;
-    }
-    .top-links {
-      position: fixed;
-      top: 1rem;
-      right: 1.5rem;
-      z-index: 9998;
-      display: flex;
-      gap: 1rem;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      background: rgba(0, 0, 0, 0.45);
-      border-radius: 6px;
-    }
-    .top-links a {
-      font-size: 1rem;
-    }
+    <meta charset="UTF-8">
+    <title>DigIT</title>
+    <link rel="icon" href="./icon.png" type="image/png">
+    <style>
+        html {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            height: 100%;
+        }
 
-    .svg-container {
-        width: 90%;
-        min-width: 600px;
-        max-width: 1300px;
-        height: auto;
-        margin: 0 auto;
-    }
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #021921ff;
+            height: 100%;
+            overflow-y: auto;
+            overflow-x: hidden;
+            scroll-snap-type: y mandatory;
+            scroll-behavior: smooth;
+            position: relative;
+            /* anchor absolute snap points */
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 26px;
+            line-height: 1.5;
+        }
 
-    .svg-container object {
-      width: 100%;
-      height: auto; 
-      display: block;
-    }
+        a {
+            color: #9cdbdaff;
+            text-decoration: none;
+            cursor: pointer;
+            font-size: 25px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        }
 
-    /* invisible snap markers */
-    .snap-point {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 1px;
-        background: red;
-        opacity: 0;
-        scroll-snap-align: center;
-        pointer-events: none;
-        z-index: 9999;
-    }
-    .snap-point.top {
-        scroll-snap-align: start;
-    }
+        a.hover {
+            font-weight: bold;
+        }
 
-    /* Full-screen-ish popup for SVG links */
-    .svg-link-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 10000;
-    }
+        .top-links {
+            position: fixed;
+            top: 1rem;
+            right: 1.5rem;
+            z-index: 9998;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 0, 0, 0.45);
+            border-radius: 6px;
+        }
 
-    .svg-link-overlay.is-visible {
-      display: flex;
-    }
+        .top-links a {
+            font-size: 1rem;
+        }
 
-    .svg-link-dialog {
-      box-sizing: border-box;
-      width: 92%;
-      max-width: 960px;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      background: rgba(236, 236, 236, 0.95);
-      color: black;
-      border-radius: 10px;
-      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
-      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      font-size: 18px;
-      line-height: 2;
-      /*opacity: 0.8;*/
-      /*border: 2px solid #9cdbdaff; */
-    }
+        .svg-container {
+            width: 90%;
+            min-width: 600px;
+            max-width: 1300px;
+            height: auto;
+            max-height: 90vh;
+            margin: 0 auto;
+        }
 
-    .svg-link-dialog-header {
-      flex-shrink: 0;
-      position: relative;
-      padding: 0.75rem 2rem 0.5rem;
-    }
+        .svg-container object {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
 
-    .svg-link-dialog-body {
-      flex: 1;
-      min-height: 0;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 2em 2rem 1.75rem 2rem;
-    }
+        /* invisible snap markers */
+        .snap-point {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: red;
+            opacity: 0;
+            scroll-snap-align: center;
+            pointer-events: none;
+            z-index: 9999;
+        }
 
-    .svg-link-dialog h1,
-    .svg-link-dialog h2,
-    .svg-link-dialog h3 {
-      margin-top: 0;
-      color: black; /* white headings */
-    }
+        .snap-point.top {
+            scroll-snap-align: start;
+        }
 
-    .svg-link-dialog p {
-      line-height: 2;
-      margin: 0 0 0.75rem 0;
-      font-size: 18px;
-    }
-    .svg-link-dialog img {
-        max-width: 85%;
-        max-height: 250px;
-        width: auto;
-        height: auto;
-        display: block;
-        margin: 0 auto;
-    }
+        /* Full-screen-ish popup for SVG links */
+        .svg-link-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+        }
 
-    .svg-link-dialog a {
-      color: #cc530dff;
-      text-decoration: underline;
-      line-height: 2;
-      font-size: 18px;
-    }
+        .svg-link-overlay.is-visible {
+            display: flex;
+        }
 
-    .svg-link-dialog blockquote {
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      background: lightgray;
-    }
+        .svg-link-dialog {
+            box-sizing: border-box;
+            width: 92%;
+            max-width: 960px;
+            max-height: 90vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: rgba(236, 236, 236, 0.95);
+            color: black;
+            border-radius: 10px;
+            box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            font-size: 18px;
+            line-height: 2;
+            /*opacity: 0.8;*/
+            /*border: 2px solid #9cdbdaff; */
+        }
 
-    .svg-link-dialog pre,
-    .svg-link-dialog code {
-      white-space: pre-wrap;
-      overflow-wrap: break-word;
-      word-wrap: break-word;
-      background: lightgray;
-      
-    }
-    .svg-lilnk-dialog em {
-        font-style: italic;
-        text-align: center;
-    }
+        .svg-link-dialog-header {
+            flex-shrink: 0;
+            position: relative;
+            padding: 0.75rem 2rem 0.5rem;
+        }
 
-    .svg-link-close {
-      position: absolute;
-      top: 0.5rem;
-      right: 1rem;
-      border: none;
-      outline: none;
-      background: transparent;
-      color: black; /* white close icon */
-      font-size: 1.5rem;
-      cursor: pointer;
-      padding: 0.25rem 0.5rem;
-    }
+        .svg-link-dialog-body {
+            flex: 1;
+            min-height: 0;
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 2em 2rem 1.75rem 2rem;
+        }
 
-    .svg-link-close:focus-visible {
-      outline: none;
-    }
+        .svg-link-dialog h1,
+        .svg-link-dialog h2,
+        .svg-link-dialog h3 {
+            margin-top: 0;
+            color: black;
+            /* white headings */
+        }
 
-    /* Mobile: double font sizes in markdown pop-up */
-    .svg-link-dialog.svg-link-dialog-mobile {
-      font-size: 36px;
-    }
-    .svg-link-dialog.svg-link-dialog-mobile p,
-    .svg-link-dialog.svg-link-dialog-mobile a {
-      font-size: 36px;
-    }
-    .svg-link-dialog.svg-link-dialog-mobile .svg-link-close {
-      font-size: 3rem;
-    }
-  </style>
+        .svg-link-dialog p {
+            line-height: 2;
+            margin: 0 0 0.75rem 0;
+            font-size: 18px;
+        }
+
+        .svg-link-dialog img {
+            max-width: 85%;
+            max-height: 250px;
+            width: auto;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .svg-link-dialog a {
+            color: #cc530dff;
+            text-decoration: underline;
+            line-height: 2;
+            font-size: 18px;
+        }
+
+        .svg-link-dialog blockquote {
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            background: lightgray;
+        }
+
+        .svg-link-dialog pre,
+        .svg-link-dialog code {
+            white-space: pre-wrap;
+            overflow-wrap: break-word;
+            word-wrap: break-word;
+            background: lightgray;
+
+        }
+
+        .svg-lilnk-dialog em {
+            font-style: italic;
+            text-align: center;
+        }
+
+        .svg-link-close {
+            position: absolute;
+            top: 0.5rem;
+            right: 1rem;
+            border: none;
+            outline: none;
+            background: transparent;
+            color: black;
+            /* white close icon */
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.25rem 0.5rem;
+        }
+
+        .svg-link-close:focus-visible {
+            outline: none;
+        }
+
+        /* Mobile: double font sizes in markdown pop-up */
+        .svg-link-dialog.svg-link-dialog-mobile {
+            font-size: 36px;
+        }
+
+        .svg-link-dialog.svg-link-dialog-mobile p,
+        .svg-link-dialog.svg-link-dialog-mobile a {
+            font-size: 36px;
+        }
+
+        .svg-link-dialog.svg-link-dialog-mobile .svg-link-close {
+            font-size: 3rem;
+        }
+    </style>
 </head>
+
 <body>
     <nav class="top-links" aria-label="Language and social">
-      <a href="#de" hreflang="de" lang="de">De</a>
-      <a href="#en" hreflang="en" lang="en"><b>En</b></a>
-      <a href="https://www.linkedin.com/company/digitalexploration" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="./#de/top" id="linkDe" hreflang="de" lang="de">De</a>
+        <a href="./#en/top" id="linkEn" hreflang="en" lang="en"><b>En</b></a>
+        <a href="https://www.linkedin.com/company/digitalexploration" target="_blank"
+            rel="noopener noreferrer">LinkedIn</a>
     </nav>
     <div class="svg-container" id="svgContainer">
-    <object
-      id="svgObject"
-      type="image/svg+xml"
-      data="homepage.svg">
-      Your browser does not support SVGs.
-    </object>
-  </div>
-  <!-- Marked: Markdown parser via CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-  <script>
-    // SNAP NAVIGATION
-    function createSectionSnapPoints() {
-        const obj = document.getElementById("svgObject");
-        const svgDoc = obj.contentDocument;
-        const svgEl = svgDoc.documentElement;
-        
-        const scrollTop = document.body.scrollTop || window.scrollY || 0;
+        <object id="svgObject" type="image/svg+xml" data="homepage.svg">
+            Your browser does not support SVGs... lol!
+        </object>
+    </div>
+    <!-- Marked: Markdown parser via CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script>
+        // --- Hash routing: #lang/snapId or #lang/snapId/topic (lang = de | en) ---
+        let currentLanguage = "en";
 
-        // Add top snap point (id for #top routing)
-        const topSnap = document.createElement("div");
-        topSnap.id = "top";
-        topSnap.className = "snap-point top";
-        topSnap.style.top = "0px";
-        document.body.appendChild(topSnap);
-        
-        // Select all Snap sections
-        const sections = [...svgDoc.querySelectorAll('[id*="Snap"]')];
-        
-        // Hide all sections initially and set up fade-in
-        sections.forEach(sec => {
-            sec.style.opacity = "0";
-            sec.style.transition = "opacity 0.5s";
-        });
-        
-        // Create snap points for each section and map to sections
-        const snapPoints = sections.map((section) => {
-        // Use getBoundingClientRect so position accounts for transforms and nesting (getBBox is local coords only)
-        const sectionRect = section.getBoundingClientRect();
-        const pageCenterY = (sectionRect.top + sectionRect.bottom) / 2 + scrollTop;
-
-        // add snap at document top (id from section for hash URLs, e.g. #aboutSnap)
-        const snap = document.createElement("div");
-        snap.className = "snap-point";
-        const sectionId = section.getAttribute("id") || section.getAttribute("inkscape:label") || "";
-        if (sectionId) snap.id = sectionId;
-        snap.style.position = "absolute";
-        snap.style.top = `${pageCenterY}px`;
-        snap.style.left = "0";
-        snap.style.width = "100%";
-        snap.style.height = "1px";
-        snap.style.pointerEvents = "none";
-        document.body.appendChild(snap);
-            return { snap, section };
-        });
-        
-        // Intersection Observer to fade in/out
-        const observerOptions = {
-            root: null, // viewport
-            //rootMargin: `-${window.innerHeight / 2}px 0px -${window.innerHeight / 2}px 0px`, // center trigger
-            rootMargin: "10px 0px 10px 0px",
-            threshold: 1
-        };
-        
-        const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.target === topSnap) {
-                if (entry.isIntersecting && location.hash !== "#top") {
-                    history.replaceState(null, "", "#top");
-                }
-                return;
-            }
-            const pair = snapPoints.find(s => s.snap === entry.target);
-            if (!pair) return;
-            const { snap, section } = pair;
-            if (entry.isIntersecting) {
-                section.style.opacity = "1"; // fade in
-                if (snap.id && location.hash !== "#" + snap.id) {
-                    history.replaceState(null, "", "#" + snap.id);
-                }
-            } else {
-                section.style.opacity = "0"; // fade out
-            }
-        }); }, observerOptions);
-        snapPoints.forEach(s => observer.observe(s.snap)); // Observe each snap point
-        observer.observe(topSnap); // Optionally observe the top snap point as well
-    }    
-
-    // Initialize SVG text elements named "link" as clickable HTML-style links with popup
-    function setupSvgTextLinks() {
-        const obj = document.getElementById("svgObject");
-        const svgDoc = obj && obj.contentDocument;
-        if (!svgDoc) return;
-
-        // Probe root CSS for default link styling
-        const probeLink = document.createElement("a");
-        probeLink.href = "#";
-        probeLink.textContent = "probe";
-        probeLink.style.position = "absolute";
-        probeLink.style.left = "-9999px";
-        document.body.appendChild(probeLink);
-        const computed = window.getComputedStyle(probeLink);
-        const linkColor = computed.color || "#0b6cff";
-        const linkFontSizePx = parseFloat(computed.fontSize) || 12;
-        const textDecoration = computed.textDecorationLine || computed.textDecoration || "";
-        document.body.removeChild(probeLink);
-
-        // SVG scale: so font sizes in SVG user units match target pixel size when scaled
-        const svgEl = svgDoc.documentElement;
-        const viewBox = svgEl.viewBox && svgEl.viewBox.baseVal;
-        const objRect = obj.getBoundingClientRect();
-        const scale = viewBox && viewBox.width && viewBox.height
-            ? (objRect.width / viewBox.width + objRect.height / viewBox.height) / 2
-            : 1;
-        const linkFontSizeScaled = linkFontSizePx / scale;
-
-        // Link and Index text elements: set font size to match CSS for links (a)
-        const linkAndIndexTexts = svgDoc.querySelectorAll(
-            'text[id*="Link"], text[name*="Link"], text[data-name*="Link"], text[class*="Link"], text[inkscape\\:label*="Link"], text[id*="Menu"], text[name*="Menu"], text[data-name*="Menu"], text[class*="Menu"], text[inkscape\\:label*="Menu"]'
-        );
-        linkAndIndexTexts.forEach((textEl) => {
-            textEl.style.fontSize = String(linkFontSizeScaled);
-            textEl.querySelectorAll("tspan").forEach((tspan) => { tspan.style.fontSize = String(linkFontSizeScaled); });
-        });
-
-        // *Menu text elements: link to section by label (e.g. id=aboutMenu, inkscape:label=partnersSnap -> ./#partnersSnap)
-        const menuTexts = svgDoc.querySelectorAll(
-            'text[id*="Menu"], text[name*="Menu"], text[data-name*="Menu"], text[class*="Menu"], text[inkscape\\:label*="Menu"]'
-        );
-        menuTexts.forEach((textEl) => {
-            const targetId =
-                textEl.getAttribute("inkscape:label") ||
-                textEl.getAttribute("data-section") ||
-                textEl.getAttribute("data-label") ||
-                textEl.getAttribute("aria-label");
-            if (!targetId) return;
-            textEl.style.cursor = "pointer";
-            textEl.style.fill = linkColor;
-            textEl.querySelectorAll("tspan").forEach((tspan) => {
-                tspan.style.fill = linkColor;
-            });
-            if (textDecoration.includes("underline")) {
-                textEl.style.textDecoration = "underline";
-            }
-            const menuTspans = textEl.querySelectorAll("tspan");
-            textEl.addEventListener("mouseenter", () => {
-                textEl.style.fontWeight = "700";
-                menuTspans.forEach((tspan) => { tspan.style.fontWeight = "700"; });
-            });
-            textEl.addEventListener("mouseleave", () => {
-                textEl.style.fontWeight = "400";
-                menuTspans.forEach((tspan) => { tspan.style.fontWeight = "400"; });
-            });
-            textEl.addEventListener("click", () => {
-                location.hash = targetId;
-                const el = document.getElementById(targetId);
-                if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
-            });
-        });
-
-        // Find SVG <text> elements whose id / name / label contains "Link"
-        const linkTexts = svgDoc.querySelectorAll(
-            'text[id*="Link"], text[name*="Link"], text[data-name*="Link"], text[class*="Link"], text[inkscape\\:label*="Link"]'
-        );
-        if (!linkTexts.length) return;
-
-        // Ensure a CSS rule exists inside the SVG for hover emphasis
-        if (!svgDoc.querySelector("style[data-svg-link-hover]")) {
-            const svgStyle = svgDoc.createElementNS("http://www.w3.org/2000/svg", "style");
-            svgStyle.setAttribute("data-svg-link-hover", "true");
-            svgStyle.textContent = `
-              .svg-text-link:hover {
-                font-weight: bold;
-              }
-            `;
-            svgDoc.documentElement.insertBefore(svgStyle, svgDoc.documentElement.firstChild);
-        }
-
-        // Mobile detection for larger dialog fonts
-        function isMobileDevice() {
-            return window.matchMedia("(max-width: 768px)").matches ||
-                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-        }
-
-        // Create popup overlay once
-        let overlay = document.getElementById("svgLinkOverlay");
-        if (!overlay) {
-            overlay = document.createElement("div");
-            overlay.id = "svgLinkOverlay";
-            overlay.className = "svg-link-overlay";
-            const dialogClass = "svg-link-dialog" + (isMobileDevice() ? " svg-link-dialog-mobile" : "");
-            overlay.innerHTML = `
-              <div class="${dialogClass}" role="dialog" aria-modal="true">
-                <div class="svg-link-dialog-header">
-                  <button class="svg-link-close" type="button" aria-label="Close">×</button>
-                </div>
-                <div id="svgLinkContent" class="svg-link-dialog-body"></div>
-              </div>
-            `;
-            document.body.appendChild(overlay);
-        }
-
-        const closeBtn = overlay.querySelector(".svg-link-close");
-        const contentEl = overlay.querySelector("#svgLinkContent");
-
-        function openPopup(markdown) {
-            const src = markdown || "";
-            // If marked is available, use it; otherwise fall back to plain text
-            const html = window.marked ? window.marked.parse(src) : src;
-            contentEl.innerHTML = html;
-            contentEl.querySelectorAll("a[href]").forEach((a) => {
-                const href = a.getAttribute("href") || "";
-                if (href.startsWith("#")) return;
-                a.setAttribute("target", "_blank");
-                a.setAttribute("rel", "noopener noreferrer");
-            });
-            overlay.classList.add("is-visible");
-            closeBtn.focus();
-        }
-
-        function closePopup() {
-            overlay.classList.remove("is-visible");
-        }
-
-        // Expose opening popup by link id (e.g. contextLink) for hash routing
-        window.__digITOpenPopupByLinkId = async function (linkId) {
-            try {
-                const response = await fetch(`md/${linkId}.md`);
-                if (response.ok) {
-                    const markdown = await response.text();
-                    openPopup(markdown);
-                }
-            } catch (e) {}
-        };
-
-        closeBtn.addEventListener("click", closePopup);
-        overlay.addEventListener("click", (event) => {
-            if (event.target === overlay) {
-                closePopup();
-            }
-        });
-        document.addEventListener("keydown", (event) => {
-            if (event.key === "Escape" && overlay.classList.contains("is-visible")) {
-                closePopup();
-            }
-        });
-
-        // Turn each matching SVG text element into a styled link with hover + click handlers
-        linkTexts.forEach((textEl) => {
-            // Style to resemble root HTML <a>
-            textEl.classList.add("svg-text-link");
-            textEl.style.cursor = "pointer";
-            textEl.style.fill = linkColor;
-            // Inkscape often puts its own fill on <tspan> children; override those too
-            const tspans = textEl.querySelectorAll("tspan");
-            tspans.forEach((tspan) => {
-                tspan.style.fill = linkColor;
-            });
-            if (textDecoration.includes("underline")) {
-                textEl.style.textDecoration = "underline";
-            }
-
-            // JS-driven hover effect: bold on hover, normal on leave
-            textEl.addEventListener("mouseenter", () => {
-                textEl.style.fontWeight = "700";
-                tspans.forEach((tspan) => {
-                    tspan.style.fontWeight = "700";
-                });
-            });
-            textEl.addEventListener("mouseleave", () => {
-                textEl.style.fontWeight = "400";
-                tspans.forEach((tspan) => {
-                    tspan.style.fontWeight = "400";
-                });
-            });
-
-            textEl.addEventListener("click", () => {
-                const id =
-                    textEl.getAttribute("id") ||
-                    textEl.getAttribute("inkscape:label") ||
-                    textEl.getAttribute("name") ||
-                    textEl.getAttribute("data-name");
-                if (!id) return;
-                const route = typeof window.__digITParseHashRoute === "function" && window.__digITParseHashRoute(location.hash);
-                const snapId = (route && route.snapId) || "top";
-                const topic = typeof window.__digITLinkIdToTopic === "function" && window.__digITLinkIdToTopic(id);
-                if (topic) {
-                    location.hash = snapId + "/" + topic;
-                    typeof window.__digITOpenPopupByLinkId === "function" && window.__digITOpenPopupByLinkId(id);
-                } else {
-                    typeof window.__digITOpenPopupByLinkId === "function" && window.__digITOpenPopupByLinkId(id);
-                }
-            });
-        });
-
-        // GEOLOGY PATHS: opacity always 1; fill brightness 30% by default, +20% on hover
-        const geologyGroup = svgDoc.getElementById("Geology");
-        if (geologyGroup) {
-            const parseFillToRgb = (el) => {
-                let s = el.getAttribute("fill") || (el.getAttribute("style") && el.getAttribute("style").match(/fill:\s*([^;]+)/)?.[1]) || null;
-                if (!s && svgDoc.defaultView) {
-                    const computed = svgDoc.defaultView.getComputedStyle(el).fill;
-                    if (computed && computed !== "none") s = computed;
-                }
-                s = (s || "#808080").trim();
-                if (s.startsWith("rgb")) {
-                    const m = s.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
-                    if (m) return { r: +m[1], g: +m[2], b: +m[3] };
-                }
-                if (s.startsWith("#")) {
-                    const hex = s.slice(1);
-                    if (hex.length === 6) {
-                        return { r: parseInt(hex.slice(0, 2), 16), g: parseInt(hex.slice(2, 4), 16), b: parseInt(hex.slice(4, 6), 16) };
-                    }
-                    if (hex.length === 3) {
-                        return { r: parseInt(hex[0] + hex[0], 16), g: parseInt(hex[1] + hex[1], 16), b: parseInt(hex[2] + hex[2], 16) };
-                    }
-                }
-                return { r: 128, g: 128, b: 128 };
-            };
-            const brightnessScale = (rgb, factor) => {
-                return "rgb(" + Math.round(rgb.r * factor) + "," + Math.round(rgb.g * factor) + "," + Math.round(rgb.b * factor) + ")";
-            };
-
-            const geologyPaths = geologyGroup.querySelectorAll("path");
-            geologyPaths.forEach((pathEl) => {
-                const originalRgb = parseFillToRgb(pathEl);
-                pathEl.style.opacity = "1";
-                const fillRest = brightnessScale(originalRgb, 0.4);
-                const fillHover = brightnessScale(originalRgb, 0.5);
-                pathEl.style.fill = fillRest;
-                pathEl.style.stroke = fillRest;
-                pathEl.addEventListener("mouseenter", () => {
-                    pathEl.style.fill = fillHover;
-                    pathEl.style.stroke = fillHover;
-                });
-                pathEl.addEventListener("mouseleave", () => {
-                    pathEl.style.fill = fillRest;
-                    pathEl.style.stroke = fillRest;
-                });
-            });
-        }
-
-        // Back-to-top control: click -> ./#top; visible on hover, invisible otherwise
-        const backToTop = svgDoc.getElementById("backToTop");
-        if (backToTop) {
-            backToTop.style.opacity = "0";
-            backToTop.style.transition = "opacity 0.2s";
-            backToTop.style.cursor = "pointer";
-            backToTop.addEventListener("mouseenter", () => {
-                backToTop.style.opacity = "1";
-            });
-            backToTop.addEventListener("mouseleave", () => {
-                backToTop.style.opacity = "0";
-            });
-            backToTop.addEventListener("click", () => {
-                location.hash = "top";
-                const topEl = document.getElementById("top");
-                if (topEl) topEl.scrollIntoView({ behavior: "smooth", block: "start" });
-            });
-        }
-    }
-
-    // Initialize after SVG is loaded
-    //document.getElementById("svgObject").addEventListener("load", createSectionSnapPoints);
-    document.getElementById("svgObject").addEventListener("load", () => {
-        const obj = document.getElementById("svgObject");
-        const svgDoc = obj.contentDocument;
-        if (svgDoc) {
-            const svgEl = svgDoc.documentElement;
-            const viewBox = svgEl.viewBox && svgEl.viewBox.baseVal;
-            const objRect = obj.getBoundingClientRect();
-            const scale = viewBox && viewBox.width && viewBox.height
-                ? (objRect.width / viewBox.width + objRect.height / viewBox.height) / 2
-                : 1;
-            const bodyStyle = getComputedStyle(document.body);
-            const fontFamily = bodyStyle.fontFamily;
-            const bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
-            const scaledFontSize = bodyFontSizePx / scale;
-            const fontWeight = bodyStyle.fontWeight;
-            const fontStyle = bodyStyle.fontStyle;
-            [...svgDoc.querySelectorAll("text"), ...svgDoc.querySelectorAll("tspan")].forEach((el) => {
-                el.style.fontFamily = fontFamily;
-                el.style.fontSize = String(scaledFontSize);
-                el.style.fontWeight = fontWeight;
-                el.style.fontStyle = fontStyle;
-            });
-        }
-        createSectionSnapPoints();
-        setupSvgTextLinks();
-
-        // Hash routing: #top | #aboutSnap | #aboutSnap/Context (scroll and optional dialog)
         function parseHashRoute(hashStr) {
             const raw = (hashStr || "").replace(/^#/, "").trim();
-            if (!raw) return { snapId: "top", topic: null };
-            const idx = raw.indexOf("/");
-            if (idx > 0) {
-                return { snapId: raw.slice(0, idx), topic: raw.slice(idx + 1) };
+            if (!raw) return { lang: "en", snapId: "top", topic: null };
+            const parts = raw.split("/").filter(Boolean);
+            if (parts[0] === "de" || parts[0] === "en") {
+                return {
+                    lang: parts[0],
+                    snapId: parts[1] || "top",
+                    topic: parts[2] || null
+                };
             }
-            return { snapId: raw, topic: null };
+            // Backward compat: #top or #aboutSnap/Context
+            return { lang: "en", snapId: parts[0] || "top", topic: parts[1] || null };
         }
+        window.__digITParseHashRoute = parseHashRoute;
+
+        function getSvgSrc(lang) {
+            return lang === "de" ? "homepage_de.svg" : "homepage.svg";
+        }
+        function getMarkdownFolder(lang) {
+            return lang === "de" ? "md_de" : "md";
+        }
+
         function topicToLinkId(topic) {
             if (!topic) return null;
             const t = String(topic).trim();
@@ -628,35 +278,489 @@
             if (!s) return null;
             return s.charAt(0).toUpperCase() + s.slice(1);
         }
-        window.__digITParseHashRoute = parseHashRoute;
         window.__digITTopicToLinkId = topicToLinkId;
         window.__digITLinkIdToTopic = linkIdToTopic;
+
         function applyHashRoute() {
             const hash = location.hash;
             if (!hash || hash === "#") {
-                location.replace("#top");
+                location.replace("#en/top");
                 return;
             }
-            const { snapId, topic } = parseHashRoute(hash);
-            const el = document.getElementById(snapId);
-            if (el) el.scrollIntoView({ behavior: "smooth", block: snapId === "top" ? "start" : "center" });
+            const route = parseHashRoute(hash);
+            const lang = route.lang === "de" || route.lang === "en" ? route.lang : "en";
+            currentLanguage = lang;
+
+            // Update De/En UI
+            const linkDe = document.getElementById("linkDe");
+            const linkEn = document.getElementById("linkEn");
+            if (linkDe && linkEn) {
+                linkDe.innerHTML = lang === "de" ? "<b>De</b>" : "De";
+                linkEn.innerHTML = lang === "en" ? "<b>En</b>" : "En";
+            }
+
+            // Swap SVG if language changed
+            const svgObj = document.getElementById("svgObject");
+            if (svgObj) {
+                const newSrc = getSvgSrc(lang);
+                if (svgObj.getAttribute("data") !== newSrc) {
+                    svgObj.setAttribute("data", newSrc);
+                }
+            }
+
+            // Scroll to snap section
+            const el = document.getElementById(route.snapId);
+            if (el) el.scrollIntoView({ behavior: "smooth", block: route.snapId === "top" ? "start" : "center" });
+
+            // Open popup if topic in hash
             const overlay = document.getElementById("svgLinkOverlay");
             const alreadyOpen = overlay && overlay.classList.contains("is-visible");
-            if (topic && !alreadyOpen && typeof window.__digITOpenPopupByLinkId === "function") {
-                const linkId = topicToLinkId(topic);
+            if (route.topic && !alreadyOpen && typeof window.__digITOpenPopupByLinkId === "function") {
+                const linkId = topicToLinkId(route.topic);
                 if (linkId) window.__digITOpenPopupByLinkId(linkId);
             }
         }
+        window.__digITApplyHashRoute = applyHashRoute;
 
-        if (!location.hash || location.hash === "#") {
-            location.hash = "top";
+        // SNAP NAVIGATION — snap points created once (homepage.svg and homepage_de.svg have identical layout)
+        function isMobileDevice() {
+            return window.matchMedia("(max-width: 768px)").matches ||
+                /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
         }
-        applyHashRoute();
-        window.addEventListener("hashchange", applyHashRoute);
-    });
-  </script>
-  <!-- Cloudflare Web Analytics -->
-  <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "46edf60af06d4156bf32560c992d9cf5"}'></script>
-  <!-- End Cloudflare Web Analytics -->
+
+        function setupSnapSectionVisibility(svgDoc) {
+            if (!svgDoc) return;
+            const sections = svgDoc.querySelectorAll('[id*="Snap"]');
+            sections.forEach(sec => {
+                sec.style.opacity = "0";
+                sec.style.transition = "opacity 0.5s";
+            });
+        }
+
+        function createSectionSnapPoints() {
+            if (window.__digITSnapPointsCreated) return;
+            window.__digITSnapPointsCreated = true;
+
+            const obj = document.getElementById("svgObject");
+            const svgDoc = obj.contentDocument;
+            const svgEl = svgDoc.documentElement;
+            const mobile = isMobileDevice();
+
+            const scrollTop = document.body.scrollTop || window.scrollY || 0;
+
+            // Add top snap point (id for #top routing)
+            const topSnap = document.createElement("div");
+            topSnap.id = "top";
+            topSnap.className = "snap-point top";
+            topSnap.style.top = "0px";
+            document.body.appendChild(topSnap);
+
+            // Select all Snap sections and create one snap point per section
+            const sections = [...svgDoc.querySelectorAll('[id*="Snap"]')];
+            if (!mobile) setupSnapSectionVisibility(svgDoc);
+
+            const snapElements = [topSnap];
+            sections.forEach((section) => {
+                const sectionRect = section.getBoundingClientRect();
+                const pageCenterY = (sectionRect.top + sectionRect.bottom) / 2 + scrollTop;
+                const snap = document.createElement("div");
+                snap.className = "snap-point";
+                const sectionId = section.getAttribute("id") || section.getAttribute("inkscape:label") || "";
+                if (sectionId) snap.id = sectionId;
+                snap.style.position = "absolute";
+                snap.style.top = `${pageCenterY}px`;
+                snap.style.left = "0";
+                snap.style.width = "100%";
+                snap.style.height = "1px";
+                snap.style.pointerEvents = "none";
+                document.body.appendChild(snap);
+                snapElements.push(snap);
+            });
+
+            // Observer only on non-mobile (smoother on desktop; on mobile sections stay visible, no fade/hash-from-scroll)
+            if (!mobile) {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: "10px 0px 10px 0px",
+                    threshold: 1
+                };
+                const observer = new IntersectionObserver((entries) => {
+                    const svgDocNow = document.getElementById("svgObject").contentDocument;
+                    if (!svgDocNow) return;
+                    const getLangHash = (id, topic) => {
+                        const base = "#" + currentLanguage + "/" + id;
+                        return topic ? base + "/" + topic : base;
+                    };
+                    entries.forEach(entry => {
+                        const snapId = entry.target.id || "top";
+                        if (entry.target.id === "top") {
+                            if (entry.isIntersecting) {
+                                const route = parseHashRoute(location.hash);
+                                const newHash = getLangHash("top", route.topic);
+                                if (location.hash !== newHash) history.replaceState(null, "", newHash);
+                            }
+                            return;
+                        }
+                        const section = svgDocNow.getElementById(snapId);
+                        if (section) {
+                            section.style.opacity = entry.isIntersecting ? "1" : "0";
+                            if (entry.isIntersecting && snapId) {
+                                const route = parseHashRoute(location.hash);
+                                const newHash = getLangHash(snapId, route.topic);
+                                if (location.hash !== newHash) history.replaceState(null, "", newHash);
+                            }
+                        }
+                    });
+                }, observerOptions);
+                snapElements.forEach(el => observer.observe(el));
+            }
+        }
+
+        // Initialize SVG text elements named "link" as clickable HTML-style links with popup
+        function setupSvgTextLinks() {
+            const obj = document.getElementById("svgObject");
+            const svgDoc = obj && obj.contentDocument;
+            if (!svgDoc) return;
+
+            // Probe root CSS for default link styling
+            const probeLink = document.createElement("a");
+            probeLink.href = "#";
+            probeLink.textContent = "probe";
+            probeLink.style.position = "absolute";
+            probeLink.style.left = "-9999px";
+            document.body.appendChild(probeLink);
+            const computed = window.getComputedStyle(probeLink);
+            const linkColor = computed.color || "#0b6cff";
+            const linkFontSizePx = parseFloat(computed.fontSize) || 12;
+            const textDecoration = computed.textDecorationLine || computed.textDecoration || "";
+            document.body.removeChild(probeLink);
+
+            // SVG scale: so font sizes in SVG user units match target pixel size when scaled
+            const svgEl = svgDoc.documentElement;
+            const viewBox = svgEl.viewBox && svgEl.viewBox.baseVal;
+            const objRect = obj.getBoundingClientRect();
+            const scale = viewBox && viewBox.width && viewBox.height
+                ? (objRect.width / viewBox.width + objRect.height / viewBox.height) / 2
+                : 1;
+            const linkFontSizeScaled = linkFontSizePx / scale;
+
+            // Link and Index text elements: set font size to match CSS for links (a)
+            const linkAndIndexTexts = svgDoc.querySelectorAll(
+                'text[id*="Link"], text[name*="Link"], text[data-name*="Link"], text[class*="Link"], text[inkscape\\:label*="Link"], text[id*="Menu"], text[name*="Menu"], text[data-name*="Menu"], text[class*="Menu"], text[inkscape\\:label*="Menu"]'
+            );
+            linkAndIndexTexts.forEach((textEl) => {
+                textEl.style.fontSize = String(linkFontSizeScaled);
+                textEl.querySelectorAll("tspan").forEach((tspan) => { tspan.style.fontSize = String(linkFontSizeScaled); });
+            });
+
+            // *Menu text elements: link to section by label (e.g. id=aboutMenu, inkscape:label=partnersSnap -> ./#partnersSnap)
+            const menuTexts = svgDoc.querySelectorAll(
+                'text[id*="Menu"], text[name*="Menu"], text[data-name*="Menu"], text[class*="Menu"], text[inkscape\\:label*="Menu"]'
+            );
+            menuTexts.forEach((textEl) => {
+                const targetId =
+                    textEl.getAttribute("inkscape:label") ||
+                    textEl.getAttribute("data-section") ||
+                    textEl.getAttribute("data-label") ||
+                    textEl.getAttribute("aria-label");
+                if (!targetId) return;
+                textEl.style.cursor = "pointer";
+                textEl.style.fill = linkColor;
+                textEl.querySelectorAll("tspan").forEach((tspan) => {
+                    tspan.style.fill = linkColor;
+                });
+                if (textDecoration.includes("underline")) {
+                    textEl.style.textDecoration = "underline";
+                }
+                const menuTspans = textEl.querySelectorAll("tspan");
+                textEl.addEventListener("mouseenter", () => {
+                    textEl.style.fontWeight = "700";
+                    menuTspans.forEach((tspan) => { tspan.style.fontWeight = "700"; });
+                });
+                textEl.addEventListener("mouseleave", () => {
+                    textEl.style.fontWeight = "400";
+                    menuTspans.forEach((tspan) => { tspan.style.fontWeight = "400"; });
+                });
+                textEl.addEventListener("click", () => {
+                    location.hash = "#" + currentLanguage + "/" + targetId;
+                    const el = document.getElementById(targetId);
+                    if (el) el.scrollIntoView({ behavior: "smooth", block: "center" });
+                });
+            });
+
+            // Find SVG <text> elements whose id / name / label contains "Link"
+            const linkTexts = svgDoc.querySelectorAll(
+                'text[id*="Link"], text[name*="Link"], text[data-name*="Link"], text[class*="Link"], text[inkscape\\:label*="Link"]'
+            );
+            if (!linkTexts.length) return;
+
+            // Ensure a CSS rule exists inside the SVG for hover emphasis
+            if (!svgDoc.querySelector("style[data-svg-link-hover]")) {
+                const svgStyle = svgDoc.createElementNS("http://www.w3.org/2000/svg", "style");
+                svgStyle.setAttribute("data-svg-link-hover", "true");
+                svgStyle.textContent = `
+                  .svg-text-link:hover {
+                    font-weight: bold;
+                  }
+                `;
+                svgDoc.documentElement.insertBefore(svgStyle, svgDoc.documentElement.firstChild);
+            }
+
+            // Mobile detection for larger dialog fonts
+            function isMobileDevice() {
+                return window.matchMedia("(max-width: 768px)").matches ||
+                    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+            }
+
+            // Create popup overlay once
+            let overlay = document.getElementById("svgLinkOverlay");
+            if (!overlay) {
+                overlay = document.createElement("div");
+                overlay.id = "svgLinkOverlay";
+                overlay.className = "svg-link-overlay";
+                const dialogClass = "svg-link-dialog" + (isMobileDevice() ? " svg-link-dialog-mobile" : "");
+                overlay.innerHTML = `
+                  <div class="${dialogClass}" role="dialog" aria-modal="true">
+                    <div class="svg-link-dialog-header">
+                      <button class="svg-link-close" type="button" aria-label="Close">×</button>
+                    </div>
+                    <div id="svgLinkContent" class="svg-link-dialog-body"></div>
+                  </div>
+                `;
+                document.body.appendChild(overlay);
+            }
+
+            const closeBtn = overlay.querySelector(".svg-link-close");
+            const contentEl = overlay.querySelector("#svgLinkContent");
+
+            function openPopup(markdown) {
+                const src = markdown || "";
+                // If marked is available, use it; otherwise fall back to plain text
+                const html = window.marked ? window.marked.parse(src) : src;
+                contentEl.innerHTML = html;
+                contentEl.querySelectorAll("a[href]").forEach((a) => {
+                    const href = a.getAttribute("href") || "";
+                    if (href.startsWith("#")) return;
+                    a.setAttribute("target", "_blank");
+                    a.setAttribute("rel", "noopener noreferrer");
+                });
+                overlay.classList.add("is-visible");
+                closeBtn.focus();
+            }
+
+            function closePopup() {
+                overlay.classList.remove("is-visible");
+            }
+
+            // Expose opening popup by link id (e.g. contextLink) for hash routing
+            window.__digITOpenPopupByLinkId = async function (linkId) {
+                try {
+                    const folder = getMarkdownFolder(currentLanguage);
+                    const response = await fetch(`${folder}/${linkId}.md`);
+                    if (response.ok) {
+                        const markdown = await response.text();
+                        openPopup(markdown);
+                    }
+                } catch (e) { }
+            };
+
+            const newCloseBtn = overlay.querySelector(".svg-link-close");
+            // Remove old listeners if any (by cloning could be a hack, but here we just re-add which is safe if idempotent or handled)
+            // Ideally we'd removeEventListener but anonymous functions make it hard. 
+            // Since setupSvgTextLinks is called on load, we should check if listeners already attached or not. 
+            // For simplicity in this static site, we'll assume the overlay persists but events are harmless to re-add (or we can just verify).
+
+            // To avoid duplicate listeners on close/overlay, we can check a flag or just remove and re-add if we stored references. 
+            // SIMPLIFICATION: We won't re-add listeners to overlay/closeBtn if they exist, but we will for the SVG elements since the SVG document is new.
+
+            if (!overlay.hasAttribute("data-listeners-attached")) {
+                newCloseBtn.addEventListener("click", closePopup);
+                overlay.addEventListener("click", (event) => {
+                    if (event.target === overlay) {
+                        closePopup();
+                    }
+                });
+                document.addEventListener("keydown", (event) => {
+                    if (event.key === "Escape" && overlay.classList.contains("is-visible")) {
+                        closePopup();
+                    }
+                });
+                overlay.setAttribute("data-listeners-attached", "true");
+            }
+
+            // Turn each matching SVG text element into a styled link with hover + click handlers
+            linkTexts.forEach((textEl) => {
+                // Style to resemble root HTML <a>
+                textEl.classList.add("svg-text-link");
+                textEl.style.cursor = "pointer";
+                textEl.style.fill = linkColor;
+                // Inkscape often puts its own fill on <tspan> children; override those too
+                const tspans = textEl.querySelectorAll("tspan");
+                tspans.forEach((tspan) => {
+                    tspan.style.fill = linkColor;
+                });
+                if (textDecoration.includes("underline")) {
+                    textEl.style.textDecoration = "underline";
+                }
+
+                // JS-driven hover effect: bold on hover, normal on leave
+                textEl.addEventListener("mouseenter", () => {
+                    textEl.style.fontWeight = "700";
+                    tspans.forEach((tspan) => {
+                        tspan.style.fontWeight = "700";
+                    });
+                });
+                textEl.addEventListener("mouseleave", () => {
+                    textEl.style.fontWeight = "400";
+                    tspans.forEach((tspan) => {
+                        tspan.style.fontWeight = "400";
+                    });
+                });
+
+                textEl.addEventListener("click", () => {
+                    const id =
+                        textEl.getAttribute("id") ||
+                        textEl.getAttribute("inkscape:label") ||
+                        textEl.getAttribute("name") ||
+                        textEl.getAttribute("data-name");
+                    if (!id) return;
+                    const route = typeof window.__digITParseHashRoute === "function" && window.__digITParseHashRoute(location.hash);
+                    const snapId = (route && route.snapId) || "top";
+                    const topic = typeof window.__digITLinkIdToTopic === "function" && window.__digITLinkIdToTopic(id);
+                    if (topic) {
+                        location.hash = "#" + currentLanguage + "/" + snapId + "/" + topic;
+                        typeof window.__digITOpenPopupByLinkId === "function" && window.__digITOpenPopupByLinkId(id);
+                    } else {
+                        typeof window.__digITOpenPopupByLinkId === "function" && window.__digITOpenPopupByLinkId(id);
+                    }
+                });
+            });
+
+            // GEOLOGY PATHS: opacity always 1; fill brightness 30% by default, +20% on hover
+            const geologyGroup = svgDoc.getElementById("Geology");
+            if (geologyGroup) {
+                const parseFillToRgb = (el) => {
+                    let s = el.getAttribute("fill") || (el.getAttribute("style") && el.getAttribute("style").match(/fill:\s*([^;]+)/)?.[1]) || null;
+                    if (!s && svgDoc.defaultView) {
+                        const computed = svgDoc.defaultView.getComputedStyle(el).fill;
+                        if (computed && computed !== "none") s = computed;
+                    }
+                    s = (s || "#808080").trim();
+                    if (s.startsWith("rgb")) {
+                        const m = s.match(/rgba?\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)/);
+                        if (m) return { r: +m[1], g: +m[2], b: +m[3] };
+                    }
+                    if (s.startsWith("#")) {
+                        const hex = s.slice(1);
+                        if (hex.length === 6) {
+                            return { r: parseInt(hex.slice(0, 2), 16), g: parseInt(hex.slice(2, 4), 16), b: parseInt(hex.slice(4, 6), 16) };
+                        }
+                        if (hex.length === 3) {
+                            return { r: parseInt(hex[0] + hex[0], 16), g: parseInt(hex[1] + hex[1], 16), b: parseInt(hex[2] + hex[2], 16) };
+                        }
+                    }
+                    return { r: 128, g: 128, b: 128 };
+                };
+                const brightnessScale = (rgb, factor) => {
+                    return "rgb(" + Math.round(rgb.r * factor) + "," + Math.round(rgb.g * factor) + "," + Math.round(rgb.b * factor) + ")";
+                };
+
+                const geologyPaths = geologyGroup.querySelectorAll("path");
+                geologyPaths.forEach((pathEl) => {
+                    const originalRgb = parseFillToRgb(pathEl);
+                    pathEl.style.opacity = "1";
+                    const fillRest = brightnessScale(originalRgb, 0.4);
+                    const fillHover = brightnessScale(originalRgb, 0.5);
+                    pathEl.style.fill = fillRest;
+                    pathEl.style.stroke = fillRest;
+                    pathEl.addEventListener("mouseenter", () => {
+                        pathEl.style.fill = fillHover;
+                        pathEl.style.stroke = fillHover;
+                    });
+                    pathEl.addEventListener("mouseleave", () => {
+                        pathEl.style.fill = fillRest;
+                        pathEl.style.stroke = fillRest;
+                    });
+                });
+            }
+
+            // Back-to-top control: click -> ./#top; visible on hover, invisible otherwise
+            const backToTop = svgDoc.getElementById("backToTop");
+            if (backToTop) {
+                backToTop.style.opacity = "0";
+                backToTop.style.transition = "opacity 0.2s";
+                backToTop.style.cursor = "pointer";
+                backToTop.addEventListener("mouseenter", () => {
+                    backToTop.style.opacity = "1";
+                });
+                backToTop.addEventListener("mouseleave", () => {
+                    backToTop.style.opacity = "0";
+                });
+                backToTop.addEventListener("click", () => {
+                    location.hash = "#" + currentLanguage + "/top";
+                    const topEl = document.getElementById("top");
+                    if (topEl) topEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                });
+            }
+        }
+
+        // Initialize after SVG is loaded
+        document.getElementById("svgObject").addEventListener("load", () => {
+            const obj = document.getElementById("svgObject");
+            // Check if contentDocument exists (it might be null if cross-origin or failed)
+            const svgDoc = obj.contentDocument;
+
+            if (svgDoc) {
+                const svgEl = svgDoc.documentElement;
+                const viewBox = svgEl.viewBox && svgEl.viewBox.baseVal;
+                const objRect = obj.getBoundingClientRect();
+                const scale = viewBox && viewBox.width && viewBox.height
+                    ? (objRect.width / viewBox.width + objRect.height / viewBox.height) / 2
+                    : 1;
+                const bodyStyle = getComputedStyle(document.body);
+                const fontFamily = bodyStyle.fontFamily;
+                const bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
+                const scaledFontSize = bodyFontSizePx / scale;
+                const fontWeight = bodyStyle.fontWeight;
+                const fontStyle = bodyStyle.fontStyle;
+                [...svgDoc.querySelectorAll("text"), ...svgDoc.querySelectorAll("tspan")].forEach((el) => {
+                    el.style.fontFamily = fontFamily;
+                    el.style.fontSize = String(scaledFontSize);
+                    el.style.fontWeight = fontWeight;
+                    el.style.fontStyle = fontStyle;
+                });
+            }
+            // Hide sections of the current SVG on desktop only (needed on every load for language-switch)
+            if (!isMobileDevice()) setupSnapSectionVisibility(svgDoc);
+            createSectionSnapPoints();
+            setupSvgTextLinks();
+
+            if (!location.hash || location.hash === "#") {
+                location.replace("#en/top");
+            }
+            applyHashRoute();
+        });
+
+        // Add hashchange only once — URL is source of truth for language
+        if (!window.__hashChangeListenerAdded) {
+            window.addEventListener("hashchange", applyHashRoute);
+            window.__hashChangeListenerAdded = true;
+        }
+
+        // De/En buttons: always go to top to avoid section visibility issues
+        document.getElementById("linkDe").addEventListener("click", (e) => {
+            e.preventDefault();
+            location.hash = "#de/top";
+        });
+        document.getElementById("linkEn").addEventListener("click", (e) => {
+            e.preventDefault();
+            location.hash = "#en/top";
+        });
+    </script>
+    <!-- Cloudflare Web Analytics -->
+    <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+        data-cf-beacon='{"token": "46edf60af06d4156bf32560c992d9cf5"}'></script>
+    <!-- End Cloudflare Web Analytics -->
 </body>
+
 </html>
