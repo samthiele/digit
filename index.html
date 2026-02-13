@@ -3,8 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>DigIT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DigIT — Hyperspectral mapping, geological modelling &amp; near-mine exploration for critical raw materials</title>
+    <meta name="description" content="DigIT develops digital technologies for near-mine exploration and responsible raw materials supply: hyperspectral imaging and mapping of mine faces, 3D geological modelling, mineral systems, and ore formation simulation. Funded by BMBFTR.">
+    <meta name="keywords" content="hyperspectral mapping, geological modelling, mineral systems, near-mine exploration, raw materials, mine face mapping, 3D geological model, mineral exploration, Erzgebirge, Iberian Pyrite Belt, geometallurgy, resource technology">
+    <link rel="canonical" href="https://digital-exploration.de/">
     <link rel="icon" href="./icon.png" type="image/png">
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="DigIT — Hyperspectral mapping, geological modelling &amp; near-mine exploration">
+    <meta property="og:description" content="Digital technologies for near-mine exploration: hyperspectral mapping, 3D geological modelling, mineral systems. BMFTR-funded project.">
+    <meta property="og:url" content="https://digital-exploration.de/">
+    <meta property="og:locale" content="en">
+    <meta property="og:locale:alternate" content="de">
+    <!-- Structured data for search -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ResearchProject",
+      "name": "DigIT",
+      "description": "Digital technologies for near-mine exploration: hyperspectral mapping of mine faces, 3D geological modelling, mineral systems understanding, and ore formation simulation. Supports responsible raw materials supply.",
+      "keywords": "hyperspectral mapping, geological modelling, mineral systems, near-mine exploration, raw materials, mine face mapping, mineral exploration",
+      "funder": { "@type": "Organization", "name": "BMFTR" },
+      "participant": [
+        { "@type": "Organization", "name": "Helmholtz Institute Freiberg for Resource Technology" },
+        { "@type": "Organization", "name": "Terranigma Solutions GmbH" }
+      ]
+    }
+    </script>
     <style>
         html {
             margin: 0;
@@ -37,6 +63,11 @@
             font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         }
 
+        @media (max-width: 768px) {
+            body { font-size: 16px; }
+            a { font-size: 0.875rem; }
+        }
+
         a.hover {
             font-weight: bold;
         }
@@ -58,9 +89,33 @@
             font-size: 1rem;
         }
 
+        @media (max-width: 768px) {
+            .top-links {
+                top: auto;
+                right: auto;
+                bottom: 1rem;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+            .top-links a {
+                font-size: 0.875rem;
+            }
+        }
+
+        .seo-intro {
+            position: absolute;
+            left: 1.5rem;
+            top: 1rem;
+            max-width: 42em;
+            margin: 0;
+            font-size: 0.1rem;
+            line-height: 1.4;
+            color: #021921ff;
+            z-index: 9997;
+        }
+
         .svg-container {
             width: 90%;
-            min-width: 600px;
             max-width: 1300px;
             height: auto;
             max-height: 90vh;
@@ -209,23 +264,24 @@
             outline: none;
         }
 
-        /* Mobile: double font sizes in markdown pop-up */
+        /* Mobile: slightly larger than desktop for readability, but not oversized */
         .svg-link-dialog.svg-link-dialog-mobile {
-            font-size: 36px;
+            font-size: 20px;
         }
 
         .svg-link-dialog.svg-link-dialog-mobile p,
         .svg-link-dialog.svg-link-dialog-mobile a {
-            font-size: 36px;
+            font-size: 20px;
         }
 
         .svg-link-dialog.svg-link-dialog-mobile .svg-link-close {
-            font-size: 3rem;
+            font-size: 1.5rem;
         }
     </style>
 </head>
 
 <body>
+    <p class="seo-intro" id="digit-intro">DigIT: digital technologies for <strong>near-mine exploration</strong> and <strong>raw materials</strong> supply — <strong>hyperspectral mapping</strong> of mine faces, <strong>geological modelling</strong>, <strong>mineral systems</strong>, and ore formation simulation. Study areas: Erzgebirge and Iberian Pyrite Belt.</p>
     <nav class="top-links" aria-label="Language and social">
         <a href="./#de/top" id="linkDe" hreflang="de" lang="de">De</a>
         <a href="./#en/top" id="linkEn" hreflang="en" lang="en"><b>En</b></a>
@@ -431,7 +487,8 @@
             document.body.appendChild(probeLink);
             const computed = window.getComputedStyle(probeLink);
             const linkColor = computed.color || "#0b6cff";
-            const linkFontSizePx = parseFloat(computed.fontSize) || 12;
+            let linkFontSizePx = parseFloat(computed.fontSize) || 12;
+            if (isMobileDevice()) linkFontSizePx = Math.min(linkFontSizePx, 8);
             const textDecoration = computed.textDecorationLine || computed.textDecoration || "";
             document.body.removeChild(probeLink);
 
@@ -719,7 +776,8 @@
                     : 1;
                 const bodyStyle = getComputedStyle(document.body);
                 const fontFamily = bodyStyle.fontFamily;
-                const bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
+                let bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
+                if (isMobileDevice()) bodyFontSizePx = Math.min(bodyFontSizePx, 8);
                 const scaledFontSize = bodyFontSizePx / scale;
                 const fontWeight = bodyStyle.fontWeight;
                 const fontStyle = bodyStyle.fontStyle;
