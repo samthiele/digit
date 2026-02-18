@@ -1,6 +1,6 @@
 # digit
 
-This repo hosts the website for the DigIT project. Please see the resulting website here: [www.digital-exploration.de](www.digital-exploration.de)
+This repo hosts the website for the DigIT project. Please see the resulting website here: [www.digital-exploration.de](https://digital-exploration.de/#en/top)
 
 ## Context
 
