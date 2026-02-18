@@ -1,16 +1,17 @@
-## Work package 3: Updatable common earth models and data management
-
-
------
-
-WP-3 develops self-updating geological models that integrate new data quickly for production and mine-proximal exploration. Data are standardized and Python workflows will automate model updates using GemPy and emerging neural-field approaches.
-
-**Objectives**
-
-- Workflow for creating self-updating geological models.
-- Verification and demonstration of data standardisation for  exploration data.
-- Engagement with industry and other stakeholders through conferences, trade fairs, and web presence.
+## Work package 3: Self-updating common-earth models
 
 -----
 
-![Data-driven geology model](./img/geomodel.png)
+Work package 3 develops self-updating common-earth models: geological 3D models that integrate geophysical, geological and petrophysical data into a unified understanding of the subsurface. These models can incorporate new datasets quickly and efficiently to update regional or deposit-scale exploration and mining models, using LiquidEarth and Python workflows that are being developed during the project.
+
+**Technical objectives**
+
+- Procedures for building self-updating geological models.
+
+- Verification and demonstration of graph-database based standardisation for exploration data.
+
+- Engagement with industry and other partners through conferences, trade fairs and direct outreach.
+
+-----
+
+![Data-driven geological model](./img/geomodel.png)

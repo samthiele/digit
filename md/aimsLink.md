@@ -1,12 +1,12 @@
-## Aims and Goals
+## Project aims
 
 -----
 
-DigIT aims enable non-invasive, mine-proximal exploration, through the development of digital technologies for:
+The BMFTR-funded project DigIT focuses on developing novel digital technologies for non-invasive, mine-proximal exploration. The DigIT team pursues four main goals:
 
-1. **Safe, objective mapping of mining areas** — integrating digital outcrops and hyperspectral imaging to capture valuable geological information during mining.
-2. **Self-updating geological models** — that quickly integrate new data into exploration models.
-3. **Simulation of ore formation processes** — using physical-chemical models to gain process understanding and so develop exploration targets.
-4. **Improved data integration** — through tools that enable the interoperability, longevity and reusability of mine mapping data.
+1. **Safe, objective mapping of mining areas** — by integrating digital outcrops and hyperspectral imaging to capture geologically relevant information during mining and in historic workings.
+2. **Self-updating geological models** — that can incorporate new information quickly into exploration models.
+3. **Simulation of ore-forming processes** — using physico-chemical reactive-transport simulations for process understanding and to derive exploration targets.
+4. **Improved integration of geological data** — through new tools for interoperability, long-term availability and reusability of mine-mapping data.
 
-These developments will be demonstrated in two study areas: the Sn-(Li)-W-rich [Ore Mountains](./#studySitesSnap/Erzgebirge) (Germany) and the Cu-rich [Iberian Pyrite Belt](./#studySitesSnap/Iberia) (Spain).
+The developed technology will be tested in two study areas: the tin-rich [Ore Mountains (Erzgebirge)](./#studySitesSnap/Erzgebirge) (Germany) and the copper-rich [Iberian Pyrite Belt](./#studySitesSnap/Iberia) (Spain).

@@ -2,7 +2,7 @@
 
 -----
 
-Derzeit sind noch keine Publikationen, Datensätze oder Code-Repositories zu DigIT veröffentlicht. Diese werden in Kürze hier aufgeführt.
+Das Projekt ist am 1.1.2026 gestartet. Sobald Publikationen, Datensätze oder Code-Repositories aus dem DigIT-Projekt zur Verfügungen stehen, werden sie hier veröffentlicht. 
 
 Die folgende Vorarbeiten geben einen Überblick über die wissenschaftliche und technische Grundlage, auf der das Projekt aufbaut.
 
@@ -16,9 +16,9 @@ Die folgende Vorarbeiten geben einen Überblick über die wissenschaftliche und 
 
 - [gempy](https://github.com/gempy-project): Open-Source-3D-Geologiemodellierung
 
-- [curlew](https://github.com/samthiele/curlew/): 3D-Geologiemodellierung mit Neural Fields
+- [curlew](https://github.com/samthiele/curlew/): 3D-Geologiemodellierung mit neuronalen Feldern
 
-- [hylite](https://github.com/samthiele/hylite/): hyperspektrale Grubenwandkartierung
+- [hylite](https://github.com/samthiele/hylite/): Hyperspektrale Grubenwandkartierung
 
 ### Publikationen
 

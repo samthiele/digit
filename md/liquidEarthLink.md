@@ -2,10 +2,12 @@
 
 -----
 
-[LiquidEarth](https://www.terranigma-solutions.com/liquidearth) is Terranigma Solutions’ (TER) software for visualizing geological 3D information and models. Interactive and immersive visualization is key to interacting with complex geological models and datasets, and gaining understanding about their relation to larger-scale structure and context.
+[LiquidEarth](https://www.terranigma-solutions.com/liquidearth) is a software developed by Terranigma Solutions GmbH (TER) for visualising 3D geological datasets and building subsurface models. Interactive and immersive display in 3D space is an essential step when interpreting complex geological datasets, as it facilitates the identification of key large-scale structures and context that control and localise mineralisation.
 
-Through DigIT, [LiquidEarth](https://www.terranigma-solutions.com/liquidearth) is being expanded to enable the **visualization of hyperspectral mapping data**, including 3D hyperspectral point clouds. Tools for rapidly constructing and updating 3D geological models will also be integrated to enable rapid interpretation, extraction of accurate structural measurements and seamless integration with geotechnical or geometallurgical models.
+Through the DigIT project, Terranigma is extending [LiquidEarth](https://www.terranigma-solutions.com/liquidearth) to allow the **visualisation of hyperspectral mapping data**, including hyperspectral 3D point clouds. Tools are also being developed for the rapid generation and updating of geological 3D models based on this new data type. 
+
+Our aim is that [LiquidEarth](https://www.terranigma-solutions.com/liquidearth) will become a fully integrated platform for rapid data interpretation and digital mine face mapping, and support the seamless integration of updatable datasets into geotechnical, geometallurgical and exploration models.
 
 -----
 
-![LiquidEarth ](./img/liquidEarth.png)
+![LiquidEarth](./img/liquidEarth.png)

@@ -2,9 +2,9 @@
 
 -----
 
-**Hyperspectral imaging (HSI)** has a wide range of applications in the mining and exploration industry. However, uptake is currently limited by (1) complicated data acquisition procedures, (2) long processing times (3) a lack of established procedures for underground environments and long-wave infrared (LWIR) sensors, and (4) complex analysis workflows.
+**Hyperspectral imaging (HSI)** offers new ways to analyse materials with high precision, and is already used widely in mining and exploration. Current limitations are (1) demanding data-acquisition procedures, (2) lengthy and complex processing workflows, and (3) a lack of established methods and sensors for underground use (where the sun cannot be used as a light source).
 
-DigIT aims to address many of these limitations, by developing and demonstrating realtime processing workflows for **VSWIR** (visible, shortwave infrared) and **LWIR** (long-wave infrared) hyperspectral mapping of surface and underground mining areas. 
+To address these challenges, DigIT is developing and testing new real-time processing methods for hyperspectral mapping in the **VSWIR** (visible to short-wave infrared) and **LWIR** (long-wave infrared) wavelength ranges. These new and optimised approches will be demonstrated in both open-pit and underground mines.
 
 -----
 

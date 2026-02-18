@@ -1,11 +1,11 @@
-## Erzgebirge (Ore Mountains)
+## Demonstration area 1: Ore Mountains (Erzgebirge)
 
 -----
 
-The **Ore Mountains** (Erzgebirge) straddle the border between Germany and Czechia, and host many Sn–(Li)–W-rich greisen and skarn deposits. Several of these are under advanced stage exploration.
+The **Ore Mountains (Erzgebirge)** span the border between Germany and the Czech Republic and host numerous greisen and skarn deposits with tin, lithium and tungsten. Several deposits are in an advanced exploration stage.
 
-Most importantly for DigIT, the Erzgebirge provides several easily accessible historic mines for testing and demonstrating the technology we are developing.
+For DigIT, the Ore Mountains are important as the location of several readily accessible historic mines, where the technologies developed in the project can be tested and demonstrated.
 
 ----
 
-![Image of Zinnwald underground mine](./img/zinnwald.jpg)
+![View of the Zinnwald underground mine](./img/zinnwald.jpg)

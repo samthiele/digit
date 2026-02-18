@@ -2,9 +2,9 @@
 
 -----
 
-**Hyperspektrale Bildgebung (HSI)** hat ein breites Anwendungsspektrum in Bergbau und Exploration. Die Nutzung wird derzeit begrenzt durch (1) aufwändige Datenerfassungsverfahren, (2) lange Auswertungszeiten, (3) fehlende etablierte Verfahren für den Untertageeinsatz und Langwellen-Infrarot(LWIR)-Sensoren sowie (4) komplexe Auswertungsworkflows.
+Die **hyperspektrale Bildgebung (HSI)** eröffnet neue Möglichkeiten, Materialien präziser als je zuvor zu analysieren und findet in Bergbau und Exploration bereits ein breites Anwendungsspektrum. Begrenzt wird die Nutzung derzeit jedoch durch (1) aufwändige Datenerfassungsverfahren, (2) langwierige bzw. komplexe Auswertungszeiten – und verfahren sowie (3) fehlende etablierte Verfahren und Sensoren für den Einsatz Untertage ohne natürliches Sonnenlicht.
 
-DigIT zielt darauf ab, viele dieser Einschränkungen zu adressieren, indem Echtzeit-Auswertungsworkflows für **VSWIR-** (visuell bis kurzwelliges Infrarot) und **LWIR-** (langwelliges Infrarot) hyperspektrale Kartierung von Tage- und Untertageabbaubereichen entwickelt und demonstriert werden.
+Um diese Herausforderungen zu adressieren, entwickelt und testet DigIT neue Echtzeit-Auswertungsverfahren für die hyperspektrale Kartierung mittels **VSWIR** (visuell bis kurzwelliges Infrarot) und **LWIR** (langwelliges Infrarot) in Tage- und Untertageabbaubereichen.
 
 -----
 

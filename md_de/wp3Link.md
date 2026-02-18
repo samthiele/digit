@@ -1,14 +1,16 @@
-## Arbeitspaket 3: Aktualisierbare gemeinsame Erdmodelle (Common Earth Models) und Datenverwaltung
+## Arbeitspaket 3: Entwicklung sich selbst aktualisierender Common-Earth-Modelle inklusive automatisierter Datenverwaltung
 
 -----
 
-AP-3 entwickelt selbstaktualisierende geologische Modelle, die neue Daten schnell für Produktion und lagerstättennahe Exploration integrieren. Die Daten werden standardisiert; Python-Workflows automatisieren Modellaktualisierungen unter Nutzung von GemPy und neuartigen Neural-Field-Ansätzen.
+Arbeitspaket 3 entwickelt sich selbstaktualisierende Common Earth Modelle, also geologische 3D-Modelle, die geophysikalische, geologische und petrophysikalische Daten zusammenführen, um ein einheitliches Verständnis über den Untergrund zu schaffen. Diese Modelle können tagesaktuelle Untersuchungsdaten schnell und effizient für die lagerstättennahe Exploration aber auch den Abbau integrieren. Die Daten werden standardisiert und Modellaktualisierungen mit Hilfe der von uns entwickelten Python-Workflows automatisiert. 
 
-**Ziele**
+**Geplante technische Ziele**
 
-- Workflow zur Erstellung selbstaktualisierender geologischer Modelle.
+- Verfahren zur Erstellung selbstaktualisierender geologischer Modelle.
+
 - Verifikation und Demonstration der Datenstandardisierung für Explorationsdaten.
-- Einbindung von Industrie und weiteren Partnern über Konferenzen, Messen und Webauftritt.
+
+- Einbindung von Industrie und weiteren Partnern in die wissenschaftlichen Arbeiten über Konferenzen, Messen und direkte Partneransprache.
 
 -----
 

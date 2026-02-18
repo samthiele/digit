@@ -1,10 +1,10 @@
-## Iberian Pyrite Belt (IPB)
+## Demonstration area 2: Iberian Pyrite Belt (IPB)
 
 -----
 
-The **Iberian Pyrite Belt** is world famous for volcanic-hosted massive sulphide deposits. These have been known for centuries, and several deposits are currently mined for copper using both open-pit and underground techniques.
+The **Iberian Pyrite Belt** is well known worldwide for volcanic-hosted massive sulphide mineralisation. Several deposits are currently mined for copper in open-pit and underground operations.
 
-Together with the Ore Mountains, the Iberian Pyrite Belt will be used to demonstrate new techniques for the digitization of exposed mine faces in historical and active mines. 
+Together with the Ore Mountains, the Iberian Pyrite Belt serves to demonstrate new methods for digitalisation of exposed mine walls in historic and active mines.
 
 ----
 

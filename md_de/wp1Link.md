@@ -1,14 +1,14 @@
-## Arbeitspaket 1: Kartierung von Abbauflächen mit digitalen Aufschlüssen und HSI
+## Arbeitspaket 1: Kartierung von Abbauflächen mittels digitaler Aufschlüsse und hyperspektraler Bildgebung
 
 -----
 
-In AP-1 werden zuverlässige und objektive Kartierungsverfahren für ober- und untertägige Abbaubereiche entwickelt. Dabei werden 3D-digitale Aufschlüsse aus Photogrammetrie und LiDAR mit hyperspektralen Bilddaten verknüpft, um geologisch relevante Informationen schnell zu erfassen.
+Im Arbeitspaket 1 entwickeln wir zuverlässige und objektive Kartierungsverfahren für ober- und untertägige Abbaubereiche. Dabei verknüpfen wir digitale 3D-Aufschlüsse, die mittels Photogrammetrie und LiDAR erstellt werden, mit hyperspektralen Bilddaten. Das Ziel ist die schnelle Erfassung geologisch relevanter Informationen an Grubenwänden.
 
-**Ziele**
+**Geplante technische Ziele**
 
-- Demonstrierter Workflow für Erfassung und Auswertung von Kurzwellen-Infrarot(HSI)-Daten aus dem Untertagebergbau.
-- Demonstrierter Workflow für Erfassung und Auswertung von Langwellen-Infrarot(HSI)-Daten aus dem Tagebau.
-- Fähigkeit zur Kartierung von Mineralogie und mechanischen Eigenschaften an Grubenwänden innerhalb von ca. 1 Stunde nach der hyperspektralen Datenerfassung.
+- Verfahrenstest zur Erfassung und Auswertung von Kurzwellen-Infrarot(HSI)-Daten aus dem Untertagebergbau.
+- Verfahrenstest zur Erfassung und Auswertung von Langwellen-Infrarot(HSI)-Daten aus dem Tagebau.
+- Entwicklung eines Verfahrens zur Kartierung der Mineralogie und der mechanischen Eigenschaften von Grubenwänden innerhalb einer Stunde nach der hyperspektralen Datenerfassung.
 
 -----
 ![Hyperspektrale Grubenkartierung](./img/minemaps.png)

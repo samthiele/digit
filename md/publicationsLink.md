@@ -2,30 +2,30 @@
 
 -----
 
-Currently we have not published any code, data or papers related to DigIT. These will be listed here shortly.
+DigIT started on 1 January 2026. Publications, datasets and code repositories from the DigIT project will be listed here as they become available.
 
-However, the following prior-work gives an excellent overview of the scientific and technical foundation we are building on.
+The following prior work outlines the scientific and technical basis on which the project builds.
 
 ### Datasets
 
-- [Zinnwald mine-face map](https://www.hzdr.de/FWG/FWGE/Hyperclouds/Zinnwald.html): underground hyperspectral mapping
+- [Zinnwald mine maps](https://www.hzdr.de/FWG/FWGE/Hyperclouds/Zinnwald.html): underground hyperspectral mapping
 
-- [Corta Atalaya mine-face map](https://www.hzdr.de/FWG/FWGE/Hyperclouds/CortaAtalaya.html): open-pit hyperspectral mapping
+- [Corta Atalaya mine map](https://www.hzdr.de/FWG/FWGE/Hyperclouds/CortaAtalaya.html): hyperspectral mapping of open-pit mines
+
 ### Code
 
-- [gempy](https://github.com/gempy-project): Open-source 3D geological modelling
+- [gempy](https://github.com/gempy-project): open-source 3D geological modelling
 
-- [curlew](https://github.com/samthiele/curlew/): 3D geological modelling with neural fields
+- [curlew](https://github.com/samthiele/curlew/): more open-source 3D geological modelling (with neural fields)
 
-- [hylite](https://github.com/samthiele/hylite/): Hyperspectral mine face mapping
+- [hylite](https://github.com/samthiele/hylite/): hyperspectral data analysis and mine-face mapping
 
-### Papers
+### Publications
 
 ```
 De la Varga, M., Schaaf, A., & Wellmann, F. (2019). GemPy 1.0: open-source stochastic geological modeling and inversion. Geoscientific Model Development, 12(1), 1-32.
 ```
 https://doi.org/10.5194/gmd-12-1-2019
-
 
 ```
 Thiele, S. T., Lorenz, S., et al., (2021). Multi-scale, multi-sensor data
