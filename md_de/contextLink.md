@@ -9,3 +9,5 @@ DigIT zielt darauf ab, digitale Technologien zu entwickeln, mit denen solche geo
 ## Förderung
 
 Das Projekt DigIT wird seit dem 1.1.2026 vom Bundesministerium für Forschung, Technologie und Raumfahrt (BMFTR) gefördert – und zwar im Rahmen der Bekanntmachung „Neue Wege zur Erkundung, Gewinnung und Aufbereitung von Primärrohstoffen im Kontext nationaler und europäischer Zusammenarbeit“ (EGARoh). Die Laufzeit des Projekts beträgt 3 Jahre.
+
+![Funding](./img/funding.png)

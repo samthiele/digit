@@ -65,7 +65,7 @@
 
         @media (max-width: 768px) {
             body { font-size: 16px; }
-            a { font-size: 0.875rem; }
+            a { font-size: 1rem; }
         }
 
         a.hover {
@@ -87,19 +87,6 @@
 
         .top-links a {
             font-size: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .top-links {
-                top: auto;
-                right: auto;
-                bottom: 1rem;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-            .top-links a {
-                font-size: 0.875rem;
-            }
         }
 
         .seo-intro {
@@ -487,8 +474,7 @@
             document.body.appendChild(probeLink);
             const computed = window.getComputedStyle(probeLink);
             const linkColor = computed.color || "#0b6cff";
-            let linkFontSizePx = parseFloat(computed.fontSize) || 12;
-            if (isMobileDevice()) linkFontSizePx = Math.min(linkFontSizePx, 8);
+            const linkFontSizePx = parseFloat(computed.fontSize) || 12;
             const textDecoration = computed.textDecorationLine || computed.textDecoration || "";
             document.body.removeChild(probeLink);
 
@@ -776,8 +762,7 @@
                     : 1;
                 const bodyStyle = getComputedStyle(document.body);
                 const fontFamily = bodyStyle.fontFamily;
-                let bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
-                if (isMobileDevice()) bodyFontSizePx = Math.min(bodyFontSizePx, 8);
+                const bodyFontSizePx = parseFloat(bodyStyle.fontSize) || 12;
                 const scaledFontSize = bodyFontSizePx / scale;
                 const fontWeight = bodyStyle.fontWeight;
                 const fontStyle = bodyStyle.fontStyle;

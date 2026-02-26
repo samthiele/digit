@@ -11,3 +11,5 @@ DigIT aims to develop digital technologies to capture such geological informatio
 ## Funding
 
 DigIT is funded by the Federal Ministry for Research, Technology and Space (BMFTR) from 1 January 2026 under the call “New approaches to exploration, extraction and processing of primary raw materials in the context of national and European cooperation” (EGARoh). The project runs for 3 years.
+
+![Funding](./img/funding.png)
