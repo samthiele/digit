@@ -31,6 +31,12 @@
       ]
     }
     </script>
+    <script>
+        fetch("https://app-analytics.my-app-logs.workers.dev?app=digitHome", {
+          mode: "cors",
+          keepalive: true
+        }).catch(function () {});
+    </script>
     <style>
         html {
             margin: 0;
