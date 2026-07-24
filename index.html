@@ -32,10 +32,12 @@
     }
     </script>
     <script>
-        fetch("https://app-analytics.my-app-logs.workers.dev?app=digitHome", {
-          mode: "cors",
-          keepalive: true
-        }).catch(function () {});
+        // analytics
+        const url = new URL("https://app-analytics.my-app-logs.workers.dev");
+        url.searchParams.set("app", "digitHome");
+        url.searchParams.set("page", `${window.location.origin}${window.location.pathname}`);
+        url.searchParams.set("referrer", document.referrer || "");
+        fetch(url, { mode: "cors", keepalive: true }).catch(() => {});
     </script>
     <style>
         html {
